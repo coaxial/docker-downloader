@@ -1,0 +1,31 @@
+version: '3'
+services:
+  tv:
+    environment:
+      TZ: "America/Toronto"
+    image: linuxserver/sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - sonarr_config:/config
+      # where the tv shows are stored
+      - tv:/tv
+      # where the downloads are stored
+      - downloads:/downloads
+#   movies:
+#   nzb:
+#   torrent:
+volumes:
+  sonarr_config:
+  tv:
+    driver_opts:
+      type: none
+      o: bind
+      # the docker host's ssd is too small for all this data
+      device: /media/storage/nas/TV
+  downloads:
+    driver_opts:
+      type: none
+      o: bind
+      # the docker host's ssd is too small for all this data
+      device: /media/storage/downloads
