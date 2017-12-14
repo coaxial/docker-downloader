@@ -11,3 +11,5 @@ downloading service for tv shows and movies over usenet and bittorrent.
 - This is a work in progress
 - Docker has changed a lot since I last used it, so I might be doing some very
   bad things unknowingly
+- This makes some assumptions regarding the mount points (`/media/storage` must
+  exist)
