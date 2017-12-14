@@ -12,7 +12,18 @@ services:
       - tv:/tv
       # where the downloads are stored
       - downloads:/downloads
-#   movies:
+
+  movies:
+    environment:
+      TZ: "America/Toronto"
+    image: linuxserver/couchpotato
+    ports:
+      - "5050:5050"
+    volumes:
+      - couchpotato_config:/config
+      - movies:/movies
+      - downloads:/downloads
+
   nzb:
     environment:
       TZ: "America/Toronto"
@@ -25,6 +36,7 @@ services:
 #   torrent:
 volumes:
   sonarr_config:
+  couchpotato_config:
   nzbget_config:
   tv:
     driver_opts:
@@ -32,6 +44,12 @@ volumes:
       o: bind
       # the docker host's ssd is too small for all this data
       device: /media/storage/nas/TV
+  movies:
+    driver_opts:
+      type: none
+      o: bind
+      # the docker host's ssd is too small for all this data
+      device: /media/storage/nas/Movies
   downloads:
     driver_opts:
       type: none
