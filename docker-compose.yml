@@ -33,11 +33,25 @@ services:
     volumes:
       - nzbget_config:/config
       - downloads:/downloads
-#   torrent:
+
+  torrent:
+    environment:
+      TZ: "America/Toronto"
+    image: linuxserver/transmission
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+    volumes:
+      - transmission_config:/config
+      - downloads:/downloads
+      # optional watch folder not configured
+
 volumes:
   sonarr_config:
   couchpotato_config:
   nzbget_config:
+  transmission_config:
   tv:
     driver_opts:
       type: none
