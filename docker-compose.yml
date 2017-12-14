@@ -8,15 +8,24 @@ services:
       - "8989:8989"
     volumes:
       - sonarr_config:/config
-      # where the tv shows are stored
+      # where the tv shows are stored after being processed
       - tv:/tv
       # where the downloads are stored
       - downloads:/downloads
 #   movies:
-#   nzb:
+  nzb:
+    environment:
+      TZ: "America/Toronto"
+    image: linuxserver/nzbget
+    ports:
+      - "6789:6789"
+    volumes:
+      - nzbget_config:/config
+      - downloads:/downloads
 #   torrent:
 volumes:
   sonarr_config:
+  nzbget_config:
   tv:
     driver_opts:
       type: none
