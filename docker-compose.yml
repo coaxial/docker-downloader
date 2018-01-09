@@ -1,33 +1,33 @@
 version: '3'
 services:
-  tv:
+  series:
     environment:
       TZ: "America/Toronto"
-    image: linuxserver/sonarr
+    image: linuxserver/sonarr:107
     ports:
       - "8989:8989"
     volumes:
       - sonarr_config:/config
       # where the tv shows are stored after being processed
-      - tv:/tv
+      - series:/tv
       # where the downloads are stored
       - downloads:/downloads
 
   movies:
     environment:
       TZ: "America/Toronto"
-    image: linuxserver/couchpotato
+    image: linuxserver/radarr:78
     ports:
-      - "5050:5050"
+      - "7878:7878"
     volumes:
-      - couchpotato_config:/config
+      - radarr_config:/config
       - movies:/movies
       - downloads:/downloads
 
   nzb:
     environment:
       TZ: "America/Toronto"
-    image: linuxserver/nzbget
+    image: linuxserver/nzbget:100
     ports:
       - "6789:6789"
     volumes:
@@ -37,7 +37,7 @@ services:
   torrent:
     environment:
       TZ: "America/Toronto"
-    image: linuxserver/transmission
+    image: linuxserver/transmission:103
     ports:
       - "9091:9091"
       - "51413:51413"
@@ -49,24 +49,30 @@ services:
 
 volumes:
   sonarr_config:
-  couchpotato_config:
+  radarr_config:
   nzbget_config:
   transmission_config:
-  tv:
+  series:
     driver_opts:
       type: none
       o: bind
-      # the docker host's ssd is too small for all this data
-      device: /media/storage/nas/TV
+      # mapping to a separate dir to customize which physical drive the data is
+      # on. the os might be on a smaller ssd but have another hdd available to
+      # store medias on
+      device: /srv/tv_shows
   movies:
     driver_opts:
       type: none
       o: bind
-      # the docker host's ssd is too small for all this data
-      device: /media/storage/nas/Movies
+      # mapping to a separate dir to customize which physical drive the data is
+      # on. the os might be on a smaller ssd but have another hdd available to
+      # store medias on
+      device: /srv/movies
   downloads:
     driver_opts:
       type: none
       o: bind
-      # the docker host's ssd is too small for all this data
-      device: /media/storage/downloads
+      # mapping to a separate dir to customize which physical drive the data is
+      # on. the os might be on a smaller ssd but have another hdd available to
+      # store medias on
+      device: /srv/downloads
