@@ -2,43 +2,69 @@ version: '3'
 services:
   proxy:
     image: nginx:1.13-alpine
+    restart: on-failure
     ports:
       - "80:80"
     volumes:
-      - ./files/downloader.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./files/downloader.conf:/etc/nginx/conf.d/downloader.conf:ro
+      - ./files/default.conf:/etc/nginx/conf.d/default.conf:ro
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://localhost:8080/healthcheck/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   series:
     environment:
       TZ: "America/Toronto"
     image: linuxserver/sonarr:107
+    restart: on-failure
     volumes:
       - sonarr_config:/config
       # where the tv shows are stored after being processed
       - series:/tv
       # where the downloads are stored
       - downloads:/downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8989"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   movies:
     environment:
       TZ: "America/Toronto"
     image: linuxserver/radarr:78
+    restart: on-failure
     volumes:
       - radarr_config:/config
       - movies:/movies
       - downloads:/downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   nzb:
     environment:
       TZ: "America/Toronto"
     image: linuxserver/nzbget:100
+    restart: on-failure
     volumes:
       - nzbget_config:/config
       - downloads:/downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6789"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   torrent:
     environment:
       TZ: "America/Toronto"
     image: linuxserver/transmission:103
+    restart: on-failure
     ports:
       - "51413:51413"
       - "51413:51413/udp"
@@ -46,6 +72,11 @@ services:
       - transmission_config:/config
       - downloads:/downloads
       # optional watch folder not configured
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
   sonarr_config:
