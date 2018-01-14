@@ -13,6 +13,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      - series
+      - movies
+      - nzb
+      - torrent
 
   series:
     environment:
@@ -32,6 +37,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      - nzb
+      - torrent
 
   movies:
     environment:
@@ -49,6 +57,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    depends_on:
+      - nzb
+      - torrent
 
   nzb:
     environment:
