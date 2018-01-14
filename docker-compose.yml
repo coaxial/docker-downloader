@@ -4,7 +4,7 @@ services:
     image: nginx:1.13-alpine
     restart: always
     ports:
-      - "80:80"
+      - "192.168.1.60:80:80"
     volumes:
       - ./files/downloader.conf:/etc/nginx/conf.d/downloader.conf:ro
       - ./files/default.conf:/etc/nginx/conf.d/default.conf:ro
@@ -17,8 +17,8 @@ services:
   series:
     environment:
       TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      PGID: 65534
+      PUID: 65534
     image: linuxserver/sonarr:125
     restart: always
     volumes:
@@ -36,8 +36,8 @@ services:
   movies:
     environment:
       TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      PGID: 65534
+      PUID: 65534
     image: linuxserver/radarr:99
     restart: always
     volumes:
@@ -53,8 +53,8 @@ services:
   nzb:
     environment:
       TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      PGID: 65534
+      PUID: 65534
     image: linuxserver/nzbget:113
     restart: always
     volumes:
@@ -69,13 +69,13 @@ services:
   torrent:
     environment:
       TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      PGID: 65534
+      PUID: 65534
     image: linuxserver/transmission:116
     restart: always
     ports:
-      - "51413:51413"
-      - "51413:51413/udp"
+      - "192.168.1.60:51413:51413"
+      - "192.168.1.60:51413:51413/udp"
     volumes:
       - transmission_config:/config
       - downloads:/downloads
