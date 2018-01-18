@@ -89,9 +89,9 @@ services:
       - nzbget_config:/live_data/nzbget:ro
       - transmission_config:/live_data/transmission:ro
       - tarsnap_cache:/usr/local/tarsnap-cache
-      - files/tarsnap.key:/root/tarsnap.key:ro
-      - files/tarsnap.conf:/etc/tarsnap.conf:ro
-      - files/tarsnapper.conf:/etc/tarsnapper.conf:ro
+      - ./files/tarsnap.key:/root/tarsnap.key:ro
+      - ./files/tarsnap.conf:/etc/tarsnap.conf:ro
+      - ./files/tarsnapper.conf:/etc/tarsnapper.conf:ro
 
 volumes:
   sonarr_config:
