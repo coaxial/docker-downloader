@@ -98,6 +98,7 @@ volumes:
   radarr_config:
   nzbget_config:
   transmission_config:
+  tarsnap_cache:
   series:
     driver_opts:
       type: none
