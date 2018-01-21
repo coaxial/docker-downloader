@@ -24,7 +24,7 @@ else
 fi
 
 scheme="http"
-hostname="downloader"
+hostname="proxy"
 
 api_key() {
   xmllint --xpath "/Config/ApiKey/text()" /live_data/"${dir_name}"/config.xml
