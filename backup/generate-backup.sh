@@ -32,9 +32,11 @@ api_key() {
 
 trigger_backup() {
   curl \
-    -H "X-Api-Key: $(api_key)" \
-    -H 'Content-type: application/json' \
-    -X POST \
+    --silent \
+    --show-error \
+    --header "X-Api-Key: $(api_key)" \
+    --header 'Content-type: application/json' \
+    --request POST \
     --data '{"name": "Backup"}' \
     "${scheme}://${hostname}/${url_path}/api/command"
 }
