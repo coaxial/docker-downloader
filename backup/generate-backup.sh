@@ -4,9 +4,13 @@
 # backed up
 # api docs: https://github.com/Sonarr/Sonarr/wiki/Command#backup
 
-if [ "$#" -ne 1 ] || [ "$1" != 'sonarr' ] || [ "$1" != 'radarr' ]; then
+err_exit() {
   echo 'This script only take one argument: "sonarr" or "radarr".'
   exit 1
+}
+
+if [ "$#" -ne 1 ]; then
+  err_exit
 fi
 
 if [ "$1" = 'sonarr' ]; then
@@ -15,6 +19,8 @@ if [ "$1" = 'sonarr' ]; then
 elif [ "$1" = 'radarr' ]; then
   dir_name='radarr'
   url_path='movies'
+else
+  err_exit
 fi
 
 scheme="http"
