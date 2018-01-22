@@ -2,7 +2,7 @@ version: '3'
 services:
   proxy:
     image: nginx:1.13-alpine
-    restart: on-failure
+    restart: always
     ports:
       - "80:80"
     volumes:
@@ -17,8 +17,10 @@ services:
   series:
     environment:
       TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
     image: linuxserver/sonarr:107
-    restart: on-failure
+    restart: always
     volumes:
       - sonarr_config:/config
       # where the tv shows are stored after being processed
@@ -34,8 +36,10 @@ services:
   movies:
     environment:
       TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
     image: linuxserver/radarr:78
-    restart: on-failure
+    restart: always
     volumes:
       - radarr_config:/config
       - movies:/movies
@@ -49,8 +53,10 @@ services:
   nzb:
     environment:
       TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
     image: linuxserver/nzbget:100
-    restart: on-failure
+    restart: always
     volumes:
       - nzbget_config:/config
       - downloads:/downloads
@@ -63,8 +69,10 @@ services:
   torrent:
     environment:
       TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
     image: linuxserver/transmission:103
-    restart: on-failure
+    restart: always
     ports:
       - "51413:51413"
       - "51413:51413/udp"
@@ -78,11 +86,26 @@ services:
       timeout: 10s
       retries: 5
 
+  backup:
+    build: ./backup
+    environment:
+      BACKUP_PERIODICITY: "3 28 * * *"
+    volumes:
+      - sonarr_config:/live_data/sonarr:ro
+      - radarr_config:/live_data/radarr:ro
+      - nzbget_config:/live_data/nzbget:ro
+      - transmission_config:/live_data/transmission:ro
+      - tarsnap_cache:/usr/local/tarsnap-cache
+      - ./files/tarsnap.key:/root/tarsnap.key:ro
+      - ./files/tarsnap.conf:/usr/local/etc/tarsnap.conf:ro
+      - ./files/tarsnapper.conf:/etc/tarsnapper.conf:ro
+
 volumes:
   sonarr_config:
   radarr_config:
   nzbget_config:
   transmission_config:
+  tarsnap_cache:
   series:
     driver_opts:
       type: none
