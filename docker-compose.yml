@@ -90,7 +90,7 @@ services:
     build: ./backup
     restart: always
     environment:
-      BACKUP_PERIODICITY: "3 28 * * *"
+      BACKUP_PERIODICITY: "28 3 * * *"
     volumes:
       - sonarr_config:/live_data/sonarr:ro
       - radarr_config:/live_data/radarr:ro
