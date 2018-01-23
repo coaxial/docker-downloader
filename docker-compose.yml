@@ -88,6 +88,7 @@ services:
 
   backup:
     build: ./backup
+    restart: always
     environment:
       BACKUP_PERIODICITY: "3 28 * * *"
     volumes:
