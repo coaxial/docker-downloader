@@ -4,8 +4,8 @@ services:
 
 script:
   - sudo mkdir -p /srv/{tv_shows,movies,downloads}
-  - docker-compose up -d
-  - sleep 15
+  - docker-compose up -d --build
+  - sleep 20
   - curl -o /dev/null -sfL http://localhost/series
   - curl -o /dev/null -sfL http://localhost/movies
   - curl -o /dev/null -sfL -u nzbget:tegbzn6789 http://localhost/nzb
