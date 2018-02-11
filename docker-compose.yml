@@ -86,6 +86,23 @@ services:
       timeout: 10s
       retries: 5
 
+  torrent_aggregator:
+    environment:
+      TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
+    image: linuxserver/jackett:105
+    restart: always
+    volumes:
+      - jackett_config:/config
+      # optional torrent blackhole for bulk downloads
+      # - jackett_blackhole:/downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9117"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   backup:
     build: ./backup
     restart: always
@@ -95,6 +112,7 @@ services:
       - sonarr_config:/live_data/sonarr:ro
       - radarr_config:/live_data/radarr:ro
       - nzbget_config:/live_data/nzbget:ro
+      - jackett_config:/live_data/jackett:ro
       - transmission_config:/live_data/transmission:ro
       - tarsnap_cache:/usr/local/tarsnap-cache
       - ./files/tarsnap.key:/root/tarsnap.key:ro
@@ -106,6 +124,7 @@ volumes:
   radarr_config:
   nzbget_config:
   transmission_config:
+  jackett_config:
   tarsnap_cache:
   series:
     driver_opts:

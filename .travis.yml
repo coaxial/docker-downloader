@@ -10,3 +10,4 @@ script:
   - curl -o /dev/null -sfL http://localhost/movies
   - curl -o /dev/null -sfL -u nzbget:tegbzn6789 http://localhost/nzb
   - curl -o /dev/null -sfL http://localhost/torrent
+  - curl -o /dev/null -sfL http://localhost/aggregator/torrent
