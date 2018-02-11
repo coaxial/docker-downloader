@@ -91,7 +91,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/jackett:105
+    build: ./torrent_aggregator
     restart: always
     volumes:
       - jackett_config:/config
