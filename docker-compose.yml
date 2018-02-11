@@ -101,8 +101,8 @@ services:
   torrent_aggregator:
     environment:
       TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      PGID: 65534
+      PUID: 65534
     build: ./torrent_aggregator
     restart: always
     volumes:
