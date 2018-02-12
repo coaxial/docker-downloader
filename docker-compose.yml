@@ -18,6 +18,7 @@ services:
       - movies
       - nzb
       - torrent
+      - torrent_aggregator
 
   series:
     environment:
