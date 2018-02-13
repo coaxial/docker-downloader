@@ -38,7 +38,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/radarr:78
+    image: linuxserver/radarr:86
     restart: always
     volumes:
       - radarr_config:/config
