@@ -103,6 +103,23 @@ services:
       timeout: 10s
       retries: 5
 
+  nzb_aggregator:
+    environment:
+      TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
+    build: ./nzb_aggregator
+    restart: always
+    volumes:
+      - nzbhydra_config:/config
+      # optional nzb blackhole for bulk downloads
+      # - nzbhydra_blackhole:/downloads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5075"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   backup:
     build: ./backup
     restart: always
@@ -125,6 +142,7 @@ volumes:
   nzbget_config:
   transmission_config:
   jackett_config:
+  nzbhydra_config:
   tarsnap_cache:
   series:
     driver_opts:
