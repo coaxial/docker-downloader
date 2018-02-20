@@ -9,7 +9,7 @@ services:
       - ./files/downloader.conf:/etc/nginx/conf.d/downloader.conf:ro
       - ./files/default.conf:/etc/nginx/conf.d/default.conf:ro
     healthcheck:
-      test: ["CMD", "wget -q -O- http://localhost:8080/healthcheck/ || exit 1"]
+      test: "wget -q -O- http://localhost:8080/healthcheck/ || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -28,7 +28,7 @@ services:
       # where the downloads are stored
       - downloads:/downloads
     healthcheck:
-      test: ["CMD", "curl -f http://localhost:8989 || exit 1"]
+      test: "curl -f http://localhost:8989 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -45,7 +45,7 @@ services:
       - movies:/movies
       - downloads:/downloads
     healthcheck:
-      test: ["CMD", "curl -f http://localhost:7878 || exit 1"]
+      test: "curl -f http://localhost:7878 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -61,7 +61,7 @@ services:
       - nzbget_config:/config
       - downloads:/downloads
     healthcheck:
-      test: ["CMD", "curl -f http://localhost:6789 || exit 1"]
+      test: "curl -f http://localhost:6789 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -81,7 +81,7 @@ services:
       - downloads:/downloads
       # optional watch folder not configured
     healthcheck:
-      test: ["CMD", "curl -f http://localhost:9091 || exit 1"]
+      test: "curl -f http://localhost:9091 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -98,7 +98,7 @@ services:
       # optional torrent blackhole for bulk downloads
       # - jackett_blackhole:/downloads
     healthcheck:
-      test: ["CMD", "curl -f http://localhost:9117 || exit 1"]
+      test: "curl -f http://localhost:9117 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -115,7 +115,7 @@ services:
       # optional nzb blackhole for bulk downloads
       # - nzbhydra_blackhole:/downloads
     healthcheck:
-      test: ["CMD", "curl -f http://localhost:5075 || exit 1"]
+      test: "curl -f http://localhost:5075 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
