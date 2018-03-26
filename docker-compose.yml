@@ -132,6 +132,19 @@ services:
       timeout: 10s
       retries: 5
 
+  subtitles:
+    env_file:
+      - ./subtitles.env
+    environment:
+      TZ: "America/Toronto"
+      PGID: 911
+      PUID: 911
+    build: ./subtitles
+    restart: always
+    volumes:
+      - series:/series
+      - movies:/movies
+
   backup:
     build: ./backup
     restart: always

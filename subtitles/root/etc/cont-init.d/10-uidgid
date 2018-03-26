@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv sh
+
+# 911 to stay consistent with the linuxserver uid/gid in the other services
+PUID=${PUID:-911}
+GUID=${GUID:-911}
+
+# groupmod --gid "${GUID}" --non-unique user
+# usermod --uid "${PUID}" --non-unique user
+sed -ie 's/911/65534/g' /etc/passwd
+
+echo "Using uid $(id -u user) and gid $(id -g user)"

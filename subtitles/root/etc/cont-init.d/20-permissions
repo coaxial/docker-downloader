@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv sh
+
+chown -R user:user /home/user/ /var/log/subliminal
