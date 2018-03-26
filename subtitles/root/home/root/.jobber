@@ -1,0 +1,13 @@
+[prefs]
+runLog:
+  type: file
+  path: /var/log/jobber-runs
+  maxLen: 30m
+  maxHistories: 2
+
+[jobs]
+- name: SubSearch
+  cmd: /scripts/find-subs.sh
+  time: '0 */15'
+  onError: Backoff
+  notifyOnFailure: false
