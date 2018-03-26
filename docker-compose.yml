@@ -19,7 +19,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/sonarr:107
+    image: linuxserver/sonarr:125
     restart: always
     volumes:
       - sonarr_config:/config
@@ -38,7 +38,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/radarr:86
+    image: linuxserver/radarr:99
     restart: always
     volumes:
       - radarr_config:/config
@@ -55,7 +55,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/nzbget:100
+    image: linuxserver/nzbget:113
     restart: always
     volumes:
       - nzbget_config:/config
@@ -71,7 +71,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/transmission:103
+    image: linuxserver/transmission:116
     restart: always
     ports:
       - "51413:51413"
