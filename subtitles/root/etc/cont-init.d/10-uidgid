@@ -4,8 +4,7 @@
 PUID=${PUID:-911}
 GUID=${GUID:-911}
 
-# groupmod --gid "${GUID}" --non-unique user
-# usermod --uid "${PUID}" --non-unique user
-sed -ie 's/911/65534/g' /etc/passwd
+groupmod --gid "${GUID}" --non-unique user
+usermod --uid "${PUID}" --non-unique user
 
 echo "Using uid $(id -u user) and gid $(id -g user)"
