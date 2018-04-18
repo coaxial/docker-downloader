@@ -11,4 +11,4 @@ exec s6-envuidgid "$(id -nu user)" \
   --verbose \
   /movies \
   /series" \
- 2>&1 | s6-log -bv /var/log/subliminal
+ 2>&1 | s6-log -v /var/log/subliminal
