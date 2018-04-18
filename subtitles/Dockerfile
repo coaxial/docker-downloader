@@ -10,8 +10,7 @@ RUN wget "https://api.github.com/repos/dshearer/jobber/tarball/v${JOBBER_VERSION
     make check && \
     make install DESTDIR=/jobber-dist/
 
-FROM python:3.6-alpine
-
+FROM python:3.6-alpine3.7
 COPY --from=builder /jobber-dist/usr/local/libexec/jobberrunner /jobber/jobberrunner
 COPY --from=builder /jobber-dist/usr/local/bin/jobber /jobber/jobber
 ENV PATH /jobber:${PATH}
@@ -27,6 +26,7 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY
 RUN tar xzf /tmp/s6-overlay-$S6_OVERLAY_ARCH.tar.gz -C / &&\
   rm /tmp/s6-overlay-$S6_OVERLAY_ARCH.tar.gz
 RUN adduser -u 911 -s /bin/false -D user
+RUN apk --no-cache add shadow
 
 RUN pip install subliminal==$SUBLIMINAL_VERSION
 
