@@ -1,5 +1,5 @@
 #!/usr/bin/with-contenv sh
-exec s6-envuidgid "$(id -nu user)" \
+s6-envuidgid "$(id -nu user)" \
   "/usr/local/bin/subliminal \
   --addic7ed '${ADDIC7ED_USERNAME}' '${ADDIC7ED_PASSWORD}' \
   --opensubtitles '${OPENSUBS_USERNAME}' '${OPENSUBS_PASSWORD}' \
