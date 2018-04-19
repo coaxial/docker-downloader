@@ -30,7 +30,7 @@ RUN apk --no-cache add shadow
 
 RUN pip install subliminal==$SUBLIMINAL_VERSION
 
-RUN mkdir /var/log/subliminal /var/log/jobber
+RUN mkdir -p /var/log/subliminal /var/log/jobber /var/cache/subliminal
 COPY root/ /
 RUN chmod 0600 /home/root/.jobber
 
