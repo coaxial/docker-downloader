@@ -1,2 +1,3 @@
-/var/log/jobber true  nobody 0600 0700
-/var/log/subliminal true  nobody 0600 0700
+/var/log/jobber true nobody 0600 0700
+/var/log/subliminal true nobody 0600 0700
+/var/cache/subliminal true user 0600 0700
