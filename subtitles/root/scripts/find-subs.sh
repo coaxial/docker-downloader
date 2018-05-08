@@ -5,9 +5,13 @@ exec s6-envuidgid "$(id -nu user)" \
   --opensubtitles "${OPENSUBS_USERNAME}" "${OPENSUBS_PASSWORD}" \
   --cache-dir /var/cache/subliminal \
   download \
+  --force \
   --language en \
   --provider addic7ed \
   --provider opensubtitles \
+  --refiner metadata \
+  --refiner omdb \
+  --refiner tvdb \
   --verbose \
   /movies \
   /series \
