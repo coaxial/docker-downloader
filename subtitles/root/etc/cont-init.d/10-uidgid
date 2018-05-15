@@ -2,9 +2,9 @@
 
 # 911 to stay consistent with the linuxserver uid/gid in the other services
 PUID=${PUID:-911}
-GUID=${GUID:-911}
+PGID=${PGID:-911}
 
-groupmod --gid "${GUID}" --non-unique user
+groupmod --gid "${PGID}" --non-unique user
 usermod --uid "${PUID}" --non-unique user
 
 echo "Using uid $(id -u user) and gid $(id -g user)"
