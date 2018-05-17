@@ -1,5 +1,7 @@
 # docker-downloader
 
+[![Build Status](https://travis-ci.org/coaxial/docker-downloader.svg?branch=master)](https://travis-ci.org/coaxial/docker-downloader)
+
 ## What is it?
 A collection of docker containers interfaced together to provide a media
 downloading service for tv shows and movies over usenet and bittorrent.
