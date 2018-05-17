@@ -18,16 +18,15 @@ URI | Service
 `/torrent` | [Transmission](https://transmissionbt.com/)
 `/nzb` | [NZBGet](https://nzbget.net/)
 `/aggregator/torrent` | [Jackett](https://github.com/Jackett/Jackett)
+`/aggregator/nzb` | [nzbHydra](https://github.com/theotherp/nzbhydra)
+
+Backups are with [tarsnap](https://www.tarsnap.com/), subtitles with [Subliminal](https://subliminal.readthedocs.io/en/latest/)
 
 ## Notes
 - This is a work in progress
-- Docker has changed a lot since I last used it, so I might be doing some very
-  bad things unknowingly
-- This makes some assumptions regarding the mount points
-  (`/srv/{tv_shows,movies,downloads}` must exist)
+- Docker changes very fast, I might be doing bad things unknowingly
+- This makes some assumptions regarding the mount points (`/srv/{tv_shows,movies,downloads}` must exist)
 - the volumes in `/srv` can be aliases to locations on a separate drive
 
 ## Updating versions
-Bump the tag for the relevant docker image (either in `docker-compose.yml` or
-in the `Dockerfiles` for the services that are built). Do not use the apps'
-built-in update mechanism.
+Bump the tag for the relevant docker image (either in `docker-compose.yml` or in the `Dockerfiles` for the services that are built). Do not use the apps' built-in update mechanism.
