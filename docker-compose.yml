@@ -1,7 +1,7 @@
 version: '3'
 services:
   proxy:
-    image: nginx:1.13-alpine
+    image: nginx:1.15-alpine
     restart: always
     ports:
       - "80:80"
@@ -25,7 +25,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/sonarr:125
+    image: linuxserver/sonarr:152
     restart: always
     volumes:
       - sonarr_config:/config
@@ -47,7 +47,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/radarr:99
+    image: linuxserver/radarr:128
     restart: always
     volumes:
       - radarr_config:/config
@@ -67,7 +67,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/nzbget:113
+    image: linuxserver/nzbget:138
     restart: always
     volumes:
       - nzbget_config:/config
@@ -83,7 +83,7 @@ services:
       TZ: "America/Toronto"
       PGID: 911
       PUID: 911
-    image: linuxserver/transmission:116
+    image: linuxserver/transmission:140
     restart: always
     ports:
       - "51413:51413"
