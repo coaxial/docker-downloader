@@ -5,6 +5,7 @@ services:
 script:
   - sudo mkdir -p /srv/{tv_shows,movies,downloads}
   - cp subtitles.env.example subtitles.env
+  - cp .env.example .env
   - docker-compose up -d --build
   - sleep 20
   - curl -o /dev/null -sfL http://localhost/series
