@@ -1,10 +1,10 @@
 version: '3'
 services:
   proxy:
-    image: nginx:1.15-alpine
+    image: "nginx:${NGINX_VERSION}-alpine"
     restart: always
     ports:
-      - "80:80"
+      - "${HOST_IP}:80:80"
     volumes:
       - ./files/downloader.conf:/etc/nginx/conf.d/downloader.conf:ro
       - ./files/default.conf:/etc/nginx/conf.d/default.conf:ro
@@ -22,10 +22,10 @@ services:
 
   series:
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
-    image: linuxserver/sonarr:152
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
+    image: "linuxserver/sonarr:${SONARR_TAG}"
     restart: always
     volumes:
       - sonarr_config:/config
@@ -44,10 +44,10 @@ services:
 
   movies:
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
-    image: linuxserver/radarr:128
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
+    image: "linuxserver/radarr:${RADARR_TAG}"
     restart: always
     volumes:
       - radarr_config:/config
@@ -64,10 +64,10 @@ services:
 
   nzb:
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
-    image: linuxserver/nzbget:138
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
+    image: "linuxserver/nzbget:${NZBGET_TAG}"
     restart: always
     volumes:
       - nzbget_config:/config
@@ -80,14 +80,14 @@ services:
 
   torrent:
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
-    image: linuxserver/transmission:140
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
+    image: "linuxserver/transmission:${TRANSMISSION_TAG}"
     restart: always
     ports:
-      - "51413:51413"
-      - "51413:51413/udp"
+      - "${HOST_IP}:51413:51413"
+      - "${HOST_IP}:51413:51413/udp"
     volumes:
       - transmission_config:/config
       - downloads:/downloads
@@ -100,9 +100,9 @@ services:
 
   torrent_aggregator:
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
     build: ./torrent_aggregator
     restart: always
     volumes:
@@ -117,9 +117,9 @@ services:
 
   nzb_aggregator:
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
     build: ./nzb_aggregator
     restart: always
     volumes:
@@ -136,9 +136,9 @@ services:
     env_file:
       - ./subtitles.env
     environment:
-      TZ: "America/Toronto"
-      PGID: 911
-      PUID: 911
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
     build: ./subtitles
     restart: always
     volumes:
