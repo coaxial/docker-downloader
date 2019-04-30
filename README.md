@@ -7,7 +7,9 @@ A collection of docker containers interfaced together to provide a media
 downloading service for tv shows and movies over usenet and bittorrent.
 
 ## How to use it?
-`docker-compose up` (hopefully).
+
+1. Copy the `.env.example` file to `.env` and edit values as needed.
+2. Run `docker-compose up`.
 
 Then visit the following URIs:
 
@@ -29,4 +31,4 @@ Backups are with [tarsnap](https://www.tarsnap.com/), subtitles with [Subliminal
 - the volumes in `/srv` can be aliases to locations on a separate drive
 
 ## Updating versions
-Bump the tag for the relevant docker image (either in `docker-compose.yml` or in the `Dockerfiles` for the services that are built). Do not use the apps' built-in update mechanism.
+Bump the tag for the relevant docker image (either in `.env` or in the `Dockerfiles` for the services that are built). Do not use the apps' built-in update mechanism.
