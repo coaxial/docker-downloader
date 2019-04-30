@@ -67,7 +67,7 @@ services:
       TZ: "${TZ}"
       PGID: "${PGID}"
       PUID: "${PUID}"
-    image: "linuxserver/nzbget:${SONARR_TAG}"
+    image: "linuxserver/nzbget:${NZBGET_TAG}"
     restart: always
     volumes:
       - nzbget_config:/config
