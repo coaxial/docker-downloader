@@ -3,7 +3,7 @@ services:
   - docker
 
 script:
-  - sudo mkdir -p /srv/{tv_shows,movies,downloads}
+  - sudo mkdir -p /srv/{tv_shows,movies,music,downloads}
   - cp subtitles.env.example subtitles.env
   - cp .env.example .env
   - docker-compose up -d --build
