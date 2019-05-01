@@ -67,7 +67,7 @@ services:
       TZ: "${TZ}"
       PGID: "${PGID}"
       PUID: "${PUID}"
-    image: "linuxserver/radarr:${LIDARR_TAG}"
+    image: "linuxserver/lidarr:${LIDARR_TAG}"
     restart: always
     volumes:
       - lidarr_config:/config
