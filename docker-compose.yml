@@ -16,6 +16,7 @@ services:
     depends_on:
       - series
       - movies
+      - music
       - nzb
       - torrent
       - torrent_aggregator
@@ -55,6 +56,26 @@ services:
       - downloads:/downloads
     healthcheck:
       test: "curl -f http://localhost:7878 || exit 1"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      - nzb
+      - torrent
+
+  music:
+    environment:
+      TZ: "${TZ}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
+    image: "linuxserver/lidarr:${LIDARR_TAG}"
+    restart: always
+    volumes:
+      - lidarr_config:/config
+      - music:/music
+      - downloads:/downloads
+    healthcheck:
+      test: "curl -f http://localhost:8686 || exit 1"
       interval: 30s
       timeout: 10s
       retries: 5
@@ -153,6 +174,7 @@ services:
     volumes:
       - sonarr_config:/live_data/sonarr:ro
       - radarr_config:/live_data/radarr:ro
+      - lidarr_config:/live_data/lidarr:ro
       - nzbget_config:/live_data/nzbget:ro
       - jackett_config:/live_data/jackett:ro
       - transmission_config:/live_data/transmission:ro
@@ -164,6 +186,7 @@ services:
 volumes:
   sonarr_config:
   radarr_config:
+  lidarr_config:
   nzbget_config:
   transmission_config:
   jackett_config:
@@ -185,6 +208,14 @@ volumes:
       # on. the os might be on a smaller ssd but have another hdd available to
       # store medias on
       device: /srv/movies
+  music:
+    driver_opts:
+      type: none
+      o: bind
+      # mapping to a separate dir to customize which physical drive the data is
+      # on. the os might be on a smaller ssd but have another hdd available to
+      # store medias on
+      device: /srv/music
   downloads:
     driver_opts:
       type: none
