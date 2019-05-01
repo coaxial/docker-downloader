@@ -8,9 +8,9 @@ script:
   - cp .env.example .env
   - docker-compose up -d --build
   - sleep 20
-  - curl -o /dev/null -sfL http://localhost/series
-  - curl -o /dev/null -sfL http://localhost/movies
-  - curl -o /dev/null -sfL http://localhost/music
+  - curl -sfL http://localhost/series | grep -q "<title>Sonarr</title>"
+  - curl -sfL http://localhost/movies | grep -q "<title>Radarr</title>"
+  - curl -sfL http://localhost/music | grep -q "<title>Lidarr</title>"
   - curl -o /dev/null -sfL -u nzbget:tegbzn6789 http://localhost/nzb
   - curl -sfL http://localhost/torrent | grep -q "Transmission Web Interface"
   - curl -sfL http://localhost/aggregator/torrent | grep -q "Jackett"
