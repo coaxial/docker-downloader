@@ -16,6 +16,7 @@ services:
     depends_on:
       - series
       - movies
+      - music
       - nzb
       - torrent
       - torrent_aggregator
