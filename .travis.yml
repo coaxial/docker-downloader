@@ -10,6 +10,7 @@ script:
   - sleep 20
   - curl -o /dev/null -sfL http://localhost/series
   - curl -o /dev/null -sfL http://localhost/movies
+  - curl -o /dev/null -sfL http://localhost/music
   - curl -o /dev/null -sfL -u nzbget:tegbzn6789 http://localhost/nzb
   - curl -sfL http://localhost/torrent | grep -q "Transmission Web Interface"
   - curl -sfL http://localhost/aggregator/torrent | grep -q "Jackett"

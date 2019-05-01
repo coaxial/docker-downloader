@@ -32,7 +32,7 @@ trigger_hydra_backup() {
 }
 
 err_exit() {
-  echo 'This script only take one argument: "sonarr", "radarr", or "hydra".'
+  echo 'This script only take one argument: "sonarr", "radarr", "lidarr", or "hydra".'
   exit 1
 }
 
@@ -47,6 +47,10 @@ if [ "$1" = 'sonarr' ]; then
 elif [ "$1" = 'radarr' ]; then
   dir_name='radarr'
   url_path='movies'
+  trigger_ar_backup
+elif [ "$1" = 'lidarr' ]; then
+  dir_name='lidarr'
+  url_path='music'
   trigger_ar_backup
 elif [ "$1" = 'hydra' ]; then
   dir_name='hydra'
