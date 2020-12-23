@@ -31,4 +31,10 @@ Backups are with [tarsnap](https://www.tarsnap.com/), subtitles with [Subliminal
 - the volumes in `/srv` can be aliases to locations on a separate drive
 
 ## Updating versions
-Bump the tag for the relevant docker image (either in `.env` or in the `Dockerfiles` for the services that are built). Do not use the apps' built-in update mechanism.
+Optional if using `latest`: bump the tag for the relevant docker image (either in `.env` or in the `Dockerfiles` for the services that are built). Do not use the apps' built-in update mechanism.
+
+Backup volumes: `sudo docker run --rm --volumes-from dockerdownloader_torrent_1 -v <PWD>/backups:/backup ubuntu bash`
+
+Remove existing containers `sudo docker-compose down`
+
+Create new containers `sudo docker-compose up -d`
